@@ -1,0 +1,136 @@
+//HTML code
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <script src="main.js" defer></script>
+    <title>To Do List</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="text-center my-4">
+        <h1 class="mb-4"><b> To Do List</b></h1>
+        <form class="add text-center my-4">
+          <label>
+            <h5>What's Your Plan</h5>
+          </label>
+          <input
+            placeholder="Enter the Task"
+            type="text"
+            name="add"
+            class="input form-control m-auto"
+            autocomplete="off"
+          />
+        </form>
+      </header>
+
+      <ul class="list-group todos mx-auto text-light">
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <!-- <span></span> -->
+          <!-- <i class="fa fa-trash-o delete"></i> -->
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
+
+
+
+//CSS code
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Ubuntu:wght@300&display=swap");
+body {
+  height: 100vh;
+  background-color: black;
+  min-height: 1000px;
+  font-family: "Roboto", sans-serif;
+}
+h1 {
+  color: rgb(254, 254, 254);
+}
+h5 {
+  color: rgb(245, 236, 236);
+}
+.container {
+  display: block;
+  margin: 140px auto;
+  max-width: 500px;
+  padding: 30px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border: solid white;
+}
+.input-field {
+  text-align: center;
+}
+input[type="text"] {
+  color: #fff;
+  /* border: none; */
+  border: 2px solid lightblue;
+  border-radius: 5px;
+  background-color: #f3f9ff;
+  max-width: 400px;
+}
+.todos li {
+  background-color: #fff;
+  color: black;
+  font-weight: bold;
+}
+.delete {
+  cursor: pointer;
+  color: red;
+}
+.edit {
+  size: 20px;
+  cursor: pointer;
+  color: green;
+}
+
+
+
+//JS code
+
+
+const addForm = document.querySelector(".add");
+const list = document.querySelector(".todos");
+
+addForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const todo = addForm.add.value.trim();
+
+  if (todo.length != 0) {
+    generateTemplate(todo);
+    addForm.reset();
+  } else {
+    alert("Enter the task");
+  }
+});
+``;
+const generateTemplate = (todo) => {
+  const html = `<li class='list-group-item d-flex justify-content-between align-items-center'>
+        <span>${todo}</span>
+        <i class="fa fa-trash-o delete"></i>
+    </li>`;
+  list.innerHTML += html;
+};
+
+list.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete")) {
+    e.target.parentElement.remove();
+  }
+});
